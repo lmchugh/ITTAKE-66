@@ -46,12 +46,12 @@ LEFT JOIN
 			listingid
 		) q ON q.listingid = l.ListingId
 --Get a sum of the available nights per listing
---Grabbing the most recent snapshot for each week, for each listing id and summing the number of available nights.
+--Grabbing the most recent snapshot for each week, for each listing id and summing the number of available+booked nights.
 LEFT JOIN
 		(
 		SELECT
 			iwf.listingid,
-			SUM(iwf.NightsAvailableCount) AS NightsAvailableIn2015
+			SUM(iwf.NightsAvailableCount + iwf.NightsBookedCount) AS NightsAvailableIn2015
 		FROM
 			DW.dbo.VW_InventoryWeeklyFact iwf
 		JOIN 
